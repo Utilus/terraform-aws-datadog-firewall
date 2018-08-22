@@ -1,5 +1,5 @@
 locals {
-  security_group_rule_limit = 25
+  security_group_rule_limit = 50
 
   datadog_ip_ranges_file = "tmp-datadog-ip-ranges.json"
 
@@ -66,21 +66,6 @@ resource "aws_security_group_rule" "agent_traffic_https" {
 
   from_port = "443"
   to_port   = "443"
-
-  cidr_blocks = ["${local.agent_ips}"]
-
-  security_group_id = "${aws_security_group.agent.id}"
-
-}
-
-resource "aws_security_group_rule" "agent_traffic_ntp" {
-
-  type = "egress"
-
-  protocol = "udp"
-
-  from_port = "123"
-  to_port   = "123"
 
   cidr_blocks = ["${local.agent_ips}"]
 
