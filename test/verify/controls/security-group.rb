@@ -22,3 +22,12 @@ describe aws_security_group(id: params['log_security_group_id']['value']) do
 
   it { should allow_out(port: 10516) }
 end
+
+describe aws_security_group(id: params['process_security_group_id']['value']) do
+  it { should exist }
+  its('group_name') { should eq params['process_security_group_name']['value'] }
+
+  its('outbound_rules.count') { should cmp 1 }
+
+  it { should allow_out(port: 443) }
+end

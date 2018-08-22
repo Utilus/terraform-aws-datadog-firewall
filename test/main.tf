@@ -22,3 +22,11 @@ output "log_security_group_id" {
 output "log_security_group_name" {
   value = "${module.datadog_firewall.log_security_group_name}"
 }
+
+output "process_security_group_id" {
+  value = "${module.datadog_firewall.process_security_group_id}"
+}
+
+output "process_security_group_name" {
+  value = "${module.datadog_firewall.process_security_group_name}"
+}
