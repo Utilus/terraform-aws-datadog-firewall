@@ -1,0 +1,8 @@
+name: verify
+title: InSpec Profile
+maintainer: miguelferreira@me.com
+copyright: Utilus
+copyright_email: dev@utilus.nl
+license: MIT
+summary: Integration tests for terraform-aws-deatadog-firewall module
+version: 0.1.0

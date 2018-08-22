@@ -1,0 +1,53 @@
+image: registry.gitlab.com/open-source-devex/containers/build-terraform:latest
+
+
+stages:
+- build
+- test
+- promote
+
+
+build:
+  stage: build
+  variables:
+    TF_IN_AUTOMATION: "true"
+  script:
+  - ci/build.sh
+  artifacts:
+    paths:
+    - .terraform
+    expire_in: 1 month
+
+
+test:
+  stage: test
+  dependencies:
+  - build
+  variables:
+    TF_IN_AUTOMATION: "true"
+    # Used by toolbox setup-bot to configure aws admin profile
+    SETUP_AWS_PROFILE: nlo-gateway-dev-env
+    SETUP_AWS_ACCESS_KEY_ID: "${DEV_AWS_ACCESS_KEY_ID}"
+    SETUP_AWS_SECRET_ACCESS_KEY: "${DEV_AWS_SECRET_ACCESS_KEY}"
+  before_script:
+  - /opt/toolbox/users/setup-bot.sh
+  - /opt/toolbox/users/install-ssh-key.sh "${UTILUS_BOT_SSH_KEY}"
+  script:
+  - ci/test.sh
+  after_script:
+  - /opt/toolbox/users/cleanup-bot.sh
+
+
+release:
+  stage: promote
+  variables:
+    GIT_REMOTE: git@gitlab.com:${CI_PROJECT_NAMESPACE}/${CI_PROJECT_NAME}.git
+  before_script:
+  - /opt/toolbox/users/setup-bot.sh
+  - /opt/toolbox/users/install-ssh-key.sh "${UTILUS_BOT_SSH_KEY}"
+  script:
+  - ci/release.sh
+  after_script:
+  - /opt/toolbox/users/cleanup-bot.sh
+  only:
+  - master
