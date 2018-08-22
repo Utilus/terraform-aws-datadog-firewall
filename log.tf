@@ -36,9 +36,12 @@ resource "aws_security_group" "log" {
 
   description = "Access to datadog log IPs"
 
+  tags = "${local.common_tags}"
+
   depends_on = [
     "data.local_file.log_ips"
   ]
+
 }
 
 resource "aws_security_group_rule" "log_traffic_log_port" {

@@ -1,4 +1,11 @@
 locals {
+  resource_suffix = "${var.environment != "" ? "${var.environment}-" : ""}${var.project}"
+
+  common_tags = {
+    Project     = "${var.project}"
+    Environment = "${var.environment}"
+  }
+
   security_group_rule_limit = 50
 
   datadog_ip_ranges_file = "tmp-datadog-ip-ranges.json"

@@ -32,13 +32,16 @@ data "local_file" "agent_ips" {
 
 resource "aws_security_group" "agent" {
 
-  name = "datadog-agent-ips"
+  name = "datadog-agent-ips-${local.resource_suffix}"
 
   description = "Access to datadog agent IPs"
+
+  tags = "${local.common_tags}"
 
   depends_on = [
     "data.local_file.agent_ips"
   ]
+
 }
 
 resource "aws_security_group_rule" "agent_traffic_https" {
