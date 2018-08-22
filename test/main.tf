@@ -14,3 +14,11 @@ output "agent_security_group_id" {
 output "agent_security_group_name" {
   value = "${module.datadog_firewall.agent_security_group_name}"
 }
+
+output "log_security_group_id" {
+  value = "${module.datadog_firewall.log_security_group_id}"
+}
+
+output "log_security_group_name" {
+  value = "${module.datadog_firewall.log_security_group_name}"
+}
