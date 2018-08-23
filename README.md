@@ -1,3 +1,5 @@
+[![pipeline status](https://gitlab.com/utilus/open-source/terraform-aws-datadog-firewall-cicd/badges/master/pipeline.svg)](https://gitlab.com/utilus/open-source/terraform-aws-datadog-firewall-cicd/commits/master)
+
 # terraform-aws-datadog-firewall
 
 Terraform module to whitelist DataDog IPs in AWS security groups.
