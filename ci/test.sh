@@ -5,15 +5,13 @@ cd test
 terraform_dir=../.terraform
 if [ -d "${terraform_dir}" ]; then
 
-    echo "==> Re-using terraform directory from previous job"
+    echo "==> Re-using terraform plugins from previous job"
     cp -rf ../.terraform .
 
-else
-
-    echo "==> Initializing terraform"
-    terraform init
-
 fi
+
+echo "==> Initializing terraform"
+terraform init
 
 echo "==> Applying terraform configuration"
 terraform apply -auto-approve -input=false
