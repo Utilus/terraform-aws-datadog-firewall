@@ -11,7 +11,7 @@ resource "null_resource" "extract_agent_ip_list" {
   }
 
   provisioner "local-exec" {
-    command = "cat ${local.datadog_ip_ranges_file} | jq -r '.agents .prefixes_ipv4[]' | head -n ${local.security_group_rule_limit} > ${local.agent_ips_file}"
+    command = "cat ${local.datadog_ip_ranges_file} | jq -r '.agents .prefixes_ipv4[]' | head -n ${local.security_group_rule_limit} | tee ${local.agent_ips_file}"
   }
 
   depends_on = [
