@@ -13,6 +13,58 @@ However if that firewall is a AWS security group it won't accept a domain name a
 This terraform module tries to address the firewalling for DataDog agents by querying a REST API provided by DataDog that lists all it's IPs and then create security groups and rules that cover those IPs.
 Every time terraform runs with this module in it's configuration, it will read the IPs from the REST API, generate a list of security group rules with those IPs and add those rules to specific security groups.
 
+## Usage
+
+Use this module to create security groups for the different types of traffic that DataDog expects.
+Then configure the created security groups in other resources like `aws_instance` or `aws_launch_configuration`.
+This module exports security groups both my name and id.
+
+```hcl
+provider "aws" {
+
+}
+
+module "datadog_firewall" {
+  source = "https://github.com/Utilus/terraform-aws-datadog-firewall"
+  
+  project = "myProject"
+  
+  environment = "development"
+}
+
+data "aws_ami" "ubuntu" {
+  most_recent = true
+
+  filter {
+    name   = "name"
+    values = ["ubuntu/images/hvm-ssd/ubuntu-trusty-14.04-amd64-server-*"]
+  }
+
+  filter {
+    name   = "virtualization-type"
+    values = ["hvm"]
+  }
+
+  owners = ["099720109477"] # Canonical
+}
+
+resource "aws_instance" "web" {
+  ami           = "${data.aws_ami.ubuntu.id}"
+  instance_type = "t2.micro"
+  
+  security_groups = [
+    "${module.datadog_firewall.agent_security_group_name}",
+    "${module.datadog_firewall.log_security_group_name}",
+    "${module.datadog_firewall.process_security_group_name}",
+    "${module.datadog_firewall.apm_security_group_name}",
+  ]
+
+  tags {
+    Name = "HelloWorld"
+  }
+}
+```
+
 ## CI/CD
 
 This repository defines and trigger several CI/CD pipelines.

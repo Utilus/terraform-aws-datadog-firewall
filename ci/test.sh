@@ -1,5 +1,15 @@
 #!/usr/bin/env sh
 
+
+if [ ! -x "$( which inspec )" ]; then
+
+    echo "==> Using inspec docker container"
+    inspec () {
+        docker run -it --rm -v ${HOME}/.aws:/root/.aws -v $(pwd):/share chef/inspec $@
+    }
+
+fi
+
 cd test
 
 terraform_dir=../.terraform

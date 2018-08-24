@@ -28,7 +28,7 @@ test:
   variables:
     TF_IN_AUTOMATION: "true"
     # Used by toolbox setup-bot to configure aws admin profile
-    SETUP_AWS_PROFILE: nlo-gateway-dev-env
+    SETUP_AWS_PROFILE: dev-environment
     SETUP_AWS_ACCESS_KEY_ID: "${DEV_AWS_ACCESS_KEY_ID}"
     SETUP_AWS_SECRET_ACCESS_KEY: "${DEV_AWS_SECRET_ACCESS_KEY}"
   before_script:
@@ -38,8 +38,8 @@ test:
   - ci/test.sh
   after_script:
   - /opt/toolbox/users/cleanup-bot.sh
-  except:
-  - tags
+  only:
+  - master
 
 
 release:
