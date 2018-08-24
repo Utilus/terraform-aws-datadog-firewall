@@ -38,8 +38,8 @@ test:
   - ci/test.sh
   after_script:
   - /opt/toolbox/users/cleanup-bot.sh
-  except:
-  - tags
+  only:
+  - master
 
 
 release:
