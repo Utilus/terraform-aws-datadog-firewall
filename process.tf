@@ -11,7 +11,7 @@ resource "null_resource" "extract_process_ip_list" {
   }
 
   provisioner "local-exec" {
-    command = "cat ${local.datadog_ip_ranges_file} | jq -r '.process .prefixes_ipv4[] | map(select(length > 0))' | shuf | head -n ${local.security_group_rule_limit} | tee ${local.process_ips_file}"
+    command = "cat ${local.datadog_ip_ranges_file} | jq -r '.process .prefixes_ipv4[]' | shuf | head -n ${local.security_group_rule_limit} | tee ${local.process_ips_file}"
   }
 
   depends_on = [
