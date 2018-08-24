@@ -43,7 +43,10 @@ test:
     - test/tmp-*.txt
     expire_in: 1 month
   only:
-  - master
+    refs:
+    - master
+    variables:
+    - $CI_COMMIT_MESSAGE !~ /^Incremented version.*/
 
 
 release:
@@ -58,4 +61,7 @@ release:
   after_script:
   - /opt/toolbox/users/cleanup-bot.sh
   only:
-  - master
+    refs:
+    - master
+    variables:
+    - $CI_COMMIT_MESSAGE !~ /^Incremented version.*/
