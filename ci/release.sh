@@ -3,6 +3,8 @@
 set -e
 set -v
 
+git remote -v
+
 VERSION_FILE="version.txt"
 
 VERSION=$( cat ${VERSION_FILE} )
