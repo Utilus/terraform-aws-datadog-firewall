@@ -25,9 +25,6 @@ This module exports security groups both my name and id.
 This module makes use of a few command line tools to gather the DataDog IPs:
 * curl
 * jq
-* shuf 
-* head
-* tee
 
 ### Example
 
