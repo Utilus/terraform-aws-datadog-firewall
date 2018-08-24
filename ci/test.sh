@@ -32,7 +32,7 @@ if [ "${RETURN_VALUE}" -eq 0 ]; then
     terraform output --json > verify/files/terraform.json
 
     echo "==> Running tests"
-    inspec exec verify -t aws://eu-west-1/nlo-gateway-dev-env
+    inspec exec verify -t aws://eu-west-1/terraform-aws-datadog-firewall
     RETURN_VALUE=$?
 
 fi

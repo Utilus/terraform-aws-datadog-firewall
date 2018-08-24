@@ -1,6 +1,6 @@
 provider "aws" {
   region = "eu-west-1"
-  profile = "dev-environment"
+  profile = "terraform-aws-datadog-firewall"
 }
 
 module "datadog_firewall" {
