@@ -19,6 +19,18 @@ Use this module to create security groups for the different types of traffic tha
 Then configure the created security groups in other resources like `aws_instance` or `aws_launch_configuration`.
 This module exports security groups both my name and id.
 
+
+### Dependencies
+
+This module makes use of a few command line tools to gather the DataDog IPs:
+* curl
+* jq
+* shuf 
+* head
+* tee
+
+### Example
+
 ```hcl
 provider "aws" {
 
