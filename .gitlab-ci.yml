@@ -38,6 +38,10 @@ test:
   - ci/test.sh
   after_script:
   - /opt/toolbox/users/cleanup-bot.sh
+  artifacts:
+    paths:
+    - test/tmp-*.txt
+    expire_in: 1 month
   only:
   - master
 
