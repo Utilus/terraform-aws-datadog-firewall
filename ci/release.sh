@@ -20,5 +20,5 @@ fi
 
 bump.sh ${VERSION} > ${VERSION_FILE}
 git add ${VERSION_FILE}
-git commit -m "Incremented version from ${VERSION} to $( cat ${VERSION_FILE} ) [skip ci]"
+git commit -m "Incremented version from ${VERSION} to $( cat ${VERSION_FILE} )"
 git push origin master
