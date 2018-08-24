@@ -41,7 +41,7 @@ test:
 release:
   stage: promote
   variables:
-    GIT_REMOTE: git@gitlab.com:${CI_PROJECT_NAMESPACE}/${CI_PROJECT_NAME}.git
+    GIT_REMOTE: git@github.com:utilus/terraform-aws-datadog-firewall.git
   before_script:
   - /opt/toolbox/users/setup-bot.sh
   - /opt/toolbox/users/install-ssh-key.sh "${UTILUS_BOT_SSH_KEY}"
