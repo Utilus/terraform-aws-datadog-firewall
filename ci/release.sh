@@ -13,7 +13,7 @@ git push --tags
 
 if [ -z "$( git branch | grep '^* master$' )" ]; then
   # Checkout master
-  git branch -d master
+  git branch -D master
   git fetch origin master:master
   git checkout master
 fi
