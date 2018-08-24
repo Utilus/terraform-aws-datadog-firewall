@@ -17,6 +17,8 @@ build:
     paths:
     - .terraform
     expire_in: 1 month
+  except:
+  - tags
 
 
 test:
@@ -36,6 +38,8 @@ test:
   - ci/test.sh
   after_script:
   - /opt/toolbox/users/cleanup-bot.sh
+  except:
+  - tags
 
 
 release:
