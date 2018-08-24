@@ -1,5 +1,5 @@
 locals {
-  log_ips_file = "tmp-agent-ips.txt"
+  log_ips_file = "tmp-log-ips.txt"
 
   log_ips = "${compact(split("\n", data.local_file.log_ips.content))}"
 }
