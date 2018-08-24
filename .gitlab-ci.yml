@@ -41,6 +41,7 @@ test:
   artifacts:
     paths:
     - test/tmp-*.txt
+    - test/tmp-*.json
     when: always
     expire_in: 1 month
   only:
