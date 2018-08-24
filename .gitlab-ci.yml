@@ -41,6 +41,7 @@ test:
   artifacts:
     paths:
     - test/tmp-*.txt
+    when: always
     expire_in: 1 month
   only:
     refs:
