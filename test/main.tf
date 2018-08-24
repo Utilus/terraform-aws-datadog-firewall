@@ -1,6 +1,6 @@
 provider "aws" {
   region = "eu-west-1"
-  profile = "nlo-gateway-dev-env"
+  profile = "dev-environment"
 }
 
 module "datadog_firewall" {
