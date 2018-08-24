@@ -33,3 +33,15 @@ output "process_security_group_name" {
 
   value = "${aws_security_group.process.name}"
 }
+
+output "apm_security_group_id" {
+  description = "ID of the security group for APM traffic"
+
+  value = "${aws_security_group.apm.id}"
+}
+
+output "apm_security_group_name" {
+  description = "Name of the security group for APM traffic"
+
+  value = "${aws_security_group.apm.name}"
+}
