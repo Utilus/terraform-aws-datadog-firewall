@@ -4,7 +4,7 @@ locals {
 
 data "external" "process_ip_list" {
   program = [
-    "${path.module}/download-and-filter-ips.sh",
+    "${path.module}/download-and-aggregate-ips.sh",
     "https://ip-ranges.datadoghq.com",
     "process",
     "${local.security_group_rule_limit}"
@@ -12,10 +12,10 @@ data "external" "process_ip_list" {
 }
 
 resource "aws_security_group" "process" {
-  name        = "datadog-process-ips-${local.resource_suffix}"
+  name        = "datadog-process-ips${local.resource_suffix}"
   description = "Access to datadog process IPs"
 
-  tags = "${local.common_tags}"
+  tags = "${merge(local.common_tags, map("Name", "datadog-process-ips${local.resource_suffix}"))}"
 }
 
 resource "aws_security_group_rule" "process_traffic_https" {

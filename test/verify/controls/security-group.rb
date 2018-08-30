@@ -1,5 +1,5 @@
 # encoding: utf-8
-# copyright: 2018, The Authors
+# copyright: 2018, Miguel Ferreira
 
 # load data from Terraform output
 content = inspec.profile.file("terraform.json")

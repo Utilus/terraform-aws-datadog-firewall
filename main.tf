@@ -1,5 +1,5 @@
 locals {
-  resource_suffix = "${var.environment != "" ? "${var.environment}-" : ""}${var.project}"
+  resource_suffix = "${var.environment != "" ? "-${var.environment}" : ""}${var.project != "" ? "-${var.project}" : ""}"
 
   common_tags = {
     Project     = "${var.project}"

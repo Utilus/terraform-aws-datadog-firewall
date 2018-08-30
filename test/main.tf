@@ -38,3 +38,11 @@ output "apm_security_group_id" {
 output "apm_security_group_name" {
   value = "${module.datadog_firewall.apm_security_group_name}"
 }
+
+output "combined_security_group_ids" {
+  value = "${module.datadog_firewall.combined_security_group_ids}"
+}
+
+output "combined_security_group_names" {
+  value = "${module.datadog_firewall.combined_security_group_names}"
+}

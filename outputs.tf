@@ -45,3 +45,15 @@ output "apm_security_group_name" {
 
   value = "${aws_security_group.apm.name}"
 }
+
+output "combined_security_group_ids" {
+  description = "ID of the security group for combined traffic"
+
+  value = "${aws_security_group.combined.*.id}"
+}
+
+output "combined_security_group_names" {
+  description = "Name of the security group for combined traffic"
+
+  value = "${aws_security_group.combined.*.name}"
+}

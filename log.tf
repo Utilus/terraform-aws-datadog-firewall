@@ -1,10 +1,10 @@
 locals {
-  logs_ips = "${compact(split(",", data.external.logs_ip_list.result.ips))}"
+  logs_ips = "${sort(compact(split(",", data.external.logs_ip_list.result.ips)))}"
 }
 
 data "external" "logs_ip_list" {
   program = [
-    "${path.module}/download-and-filter-ips.sh",
+    "${path.module}/download-and-aggregate-ips.sh",
     "https://ip-ranges.datadoghq.com",
     "logs",
     "${local.security_group_rule_limit}"
@@ -12,10 +12,10 @@ data "external" "logs_ip_list" {
 }
 
 resource "aws_security_group" "logs" {
-  name        = "datadog-log-ips"
+  name        = "datadog-log-ips${local.resource_suffix}"
   description = "Access to datadog log IPs"
 
-  tags = "${local.common_tags}"
+  tags = "${merge(local.common_tags, map("Name", "datadog-log-ips${local.resource_suffix}"))}"
 }
 
 resource "aws_security_group_rule" "logs_traffic_log_port" {
