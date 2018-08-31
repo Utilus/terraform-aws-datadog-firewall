@@ -4,18 +4,15 @@ locals {
 
 data "external" "logs_ip_list" {
   program = [
-    "${path.module}/download-and-aggregate-ips.sh",
-    "https://ip-ranges.datadoghq.com",
-    "logs",
-    "${local.security_group_rule_limit}"
+    "${path.module}/download-and-aggregate-ips.sh", "https://ip-ranges.datadoghq.com", "logs", "${local.security_group_rule_limit}"
   ]
 }
 
 resource "aws_security_group" "logs" {
-  name        = "datadog-log-ips${local.resource_suffix}"
+  name        = "datadog-logs-ips${local.resource_suffix}"
   description = "Access to datadog log IPs"
 
-  tags = "${merge(local.common_tags, map("Name", "datadog-log-ips${local.resource_suffix}"))}"
+  tags = "${merge(local.common_tags, map("Name", "datadog-logs-ips${local.resource_suffix}"))}"
 }
 
 resource "aws_security_group_rule" "logs_traffic_log_port" {

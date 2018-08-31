@@ -5,15 +5,12 @@ locals {
 # APM has a small ammount of IPs so there is no need to aggregate them
 data "external" "apm_ip_list" {
   program = [
-    "${path.module}/download-ips.sh",
-    "https://ip-ranges.datadoghq.com",
-    "apm",
-    "${local.security_group_rule_limit}"
+    "${path.module}/download-ips.sh", "https://ip-ranges.datadoghq.com", "apm", "${local.security_group_rule_limit}"
   ]
 }
 
 resource "aws_security_group" "apm" {
-  name        = "datadog-apm-ips"
+  name        = "datadog-apm-ip${local.resource_suffix}"
   description = "Access to datadog apm IPs"
 
   tags = "${merge(local.common_tags, map("Name", "datadog-apm-ips${local.resource_suffix}"))}"

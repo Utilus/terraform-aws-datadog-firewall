@@ -12,19 +12,6 @@ locals {
   https_cidrs_lists = ["${chunklist(local.unique_https_rules, local.security_group_rule_limit)}"]
 }
 
-output "https_unique_rules_count" {
-  value = "${length(local.unique_https_rules)}"
-}
-
-output "log_rules_count" {
-  value = "${length(local.logs_ips)}"
-}
-
-output "security_group_count" {
-  value = "${local.security_group_count}"
-}
-
-
 resource "aws_security_group" "combined" {
   count = "${local.security_group_count}"
 

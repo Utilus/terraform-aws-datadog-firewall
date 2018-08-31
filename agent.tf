@@ -4,21 +4,18 @@ locals {
 
 data "external" "agent_ip_list" {
   program = [
-    "${path.module}/download-and-aggregate-ips.sh",
-    "https://ip-ranges.datadoghq.com",
-    "agents",
-    "${local.security_group_rule_limit}"
+    "${path.module}/download-and-aggregate-ips.sh",  "https://ip-ranges.datadoghq.com", "agents", "${local.security_group_rule_limit}"
   ]
 }
 
-resource "aws_security_group" "agent" {
-  name        = "datadog-agent-ips${local.resource_suffix}"
+resource "aws_security_group" "agents" {
+  name        = "datadog-agents-ips${local.resource_suffix}"
   description = "Access to datadog agent IPs"
 
-  tags = "${merge(local.common_tags, map("Name", "datadog-agent-ips${local.resource_suffix}"))}"
+  tags = "${merge(local.common_tags, map("Name", "datadog-agents-ips${local.resource_suffix}"))}"
 }
 
-resource "aws_security_group_rule" "agent_traffic_https" {
+resource "aws_security_group_rule" "agents_traffic_https" {
   type = "egress"
 
   protocol = "tcp"
@@ -28,5 +25,5 @@ resource "aws_security_group_rule" "agent_traffic_https" {
 
   cidr_blocks = ["${local.agents_ips}"]
 
-  security_group_id = "${aws_security_group.agent.id}"
+  security_group_id = "${aws_security_group.agents.id}"
 }

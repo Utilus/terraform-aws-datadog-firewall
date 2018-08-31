@@ -1,13 +1,13 @@
 output "agent_security_group_id" {
   description = "ID of the security group for agent traffic"
 
-  value = "${aws_security_group.agent.id}"
+  value = "${aws_security_group.agents.id}"
 }
 
 output "agent_security_group_name" {
   description = "Name of the security group for agent traffic"
 
-  value = "${aws_security_group.agent.name}"
+  value = "${aws_security_group.agents.name}"
 }
 
 output "log_security_group_id" {
