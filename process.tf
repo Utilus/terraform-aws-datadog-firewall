@@ -12,6 +12,8 @@ resource "aws_security_group" "process" {
   name        = "datadog-process-ips${local.resource_suffix}"
   description = "Access to datadog process IPs"
 
+  vpc_id = "${local.security_group_vpc}"
+
   tags = "${merge(local.common_tags, map("Name", "datadog-process-ips${local.resource_suffix}"))}"
 }
 

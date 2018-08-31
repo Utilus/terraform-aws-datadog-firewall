@@ -13,6 +13,8 @@ resource "aws_security_group" "apm" {
   name        = "datadog-apm-ip${local.resource_suffix}"
   description = "Access to datadog apm IPs"
 
+  vpc_id = "${local.security_group_vpc}"
+
   tags = "${merge(local.common_tags, map("Name", "datadog-apm-ips${local.resource_suffix}"))}"
 }
 

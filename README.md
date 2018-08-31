@@ -153,6 +153,26 @@ resource "aws_instance" "web" {
 }
 ```
 
+### Example setting VPC id
+
+When input variable `vpc_id` is not set the security groups will be created in the default VPC of the account.
+
+```hcl
+provider "aws" {
+
+}
+
+module "datadog_firewall" {
+  source = "https://github.com/Utilus/terraform-aws-datadog-firewall"
+  
+  project = "myProject"
+  
+  environment = "development"
+  
+  vpc_id = "my-vpc-id"
+}
+```
+
 ## CI/CD
 
 This repository defines and trigger several CI/CD pipelines.

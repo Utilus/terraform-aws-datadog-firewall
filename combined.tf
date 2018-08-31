@@ -18,6 +18,8 @@ resource "aws_security_group" "combined" {
   name        = "datadog-combined-${count.index + 1}${local.resource_suffix}"
   description = "Access to datadog process IPs for agents, process, logs and APM - Number ${count.index + 1}"
 
+  vpc_id = "${local.security_group_vpc}"
+
   tags = "${merge(local.common_tags, map("Name", "datadog-combined-${count.index + 1}${local.resource_suffix}"))}"
 
 }

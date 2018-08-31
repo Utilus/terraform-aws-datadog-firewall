@@ -12,6 +12,8 @@ resource "aws_security_group" "agents" {
   name        = "datadog-agents-ips${local.resource_suffix}"
   description = "Access to datadog agent IPs"
 
+  vpc_id = "${local.security_group_vpc}"
+
   tags = "${merge(local.common_tags, map("Name", "datadog-agents-ips${local.resource_suffix}"))}"
 }
 
