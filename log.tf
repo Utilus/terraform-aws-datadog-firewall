@@ -4,7 +4,7 @@ locals {
 
 data "external" "logs_ip_list" {
   program = [
-    "${path.module}/download-and-aggregate-ips.sh", "https://ip-ranges.datadoghq.com", "logs", "${local.security_group_rule_limit}"
+    "${path.module}/download-and-aggregate-ips.sh", "https://ip-ranges.datadoghq.com", "logs"
   ]
 }
 

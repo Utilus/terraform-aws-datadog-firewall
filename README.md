@@ -19,20 +19,20 @@ Initially we decided to create CIDRs from all the IPs where we set the netmask t
 Then we tried setting the netmask to 16 bits and that resulted in +80 CIDRs which is still too much for a single security group.
 Finally with a netmask of 8 bits we were down to 7 CIDRs which is well within the limits of a Security Group.
 
-Finally not all types of traffic that DataDog receives have such a long list of IPs behind it so we tried to find a good compromise per type of traffic.
+Not all types of traffic that DataDog receives have such a long list of IPs behind it so we tried to find a good compromise per type of traffic.
 
 | Type    | # IPs | Netmask | # CIDRs |
 | ------- | ----- | ------- | ------- |
 | agents  | +400  | /8      | 7       |
-|         |       | */16*   | *+80*   |
+|         |       | /16     | +80     |
 |         |       | /24     | +400    |
 | process | +30   | /8      | 4       |
-|         |       | */16*   | *+20*   |
+|         |       | /16     | +20     |
 |         |       | /24     | +30     |    
 | logs    | +100  | /8      | 8       |
-|         | +100  | */16*   | *+70*   |
+|         | +100  | /16     | +70     |
 |         | +100  | /24     | +100    |
-| apm     | +10   | */32*   | *10*    |
+| apm     | +10   | /32     | 10      |
 
 The netmask sizes we chose allow us to fit all CIDRs into 3 Security Groups that allows traffic to all DataDog IPs, while also allowing traffic to a lot
 (many many!) other IPs on the internet.
